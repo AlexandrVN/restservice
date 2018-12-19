@@ -7,13 +7,16 @@
 <div>
     <form method="post">
         <input type="text" name="text" placeholder="Input messages" />
-        <input type="text" name="tag" placeholder="Tag" />
+        <input type="text" name="tag" placeholder="Input tag" />
         <button type="submit">Add</button>
     </form>
 </div>
-
-
 <div>List messages</div>
+<form method="post" action="filter">
+    <input type="text" name="filter" placeholder="Input filter" />
+    <button type="submit">Find</button>
+</form>
+
 {{#messages}}
     <div>
         <b>{{id}}</b>
