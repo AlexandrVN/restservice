@@ -19,13 +19,19 @@ public class HomeController {
     private MessageRepository messageRepository;
 
     @GetMapping(value = {"/", "/index"})
+    public String index(Map<String, Object> model) {
+        return "index";
+    }
+
+
+/*    @GetMapping(value = {"/", "/index"})
     public String index(
             @RequestParam(name="name", required=false, defaultValue="World") String name,
             Map<String, Object> model
     ) {
         model.put("name", name);
         return "index";
-    }
+    }*/
 
 /*    @GetMapping(value = {"/", "index"})
     public ModelAndView test(HttpServletResponse response){
@@ -33,14 +39,14 @@ public class HomeController {
             return new ModelAndView("index");
     }*/
 
-    @GetMapping
+    @GetMapping("/main")
     public String main(Map<String,Object> model){
         Iterable<Message> messages = messageRepository.findAll();
         model.put("messages", messages);
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(
             @RequestParam String text,
             @RequestParam String tag,
