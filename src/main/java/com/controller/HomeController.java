@@ -37,14 +37,22 @@ public class HomeController {
 
 /*    @GetMapping(value = {"/", "index"})
     public ModelAndView test(HttpServletResponse response){
-            //для вывода статистической страницы необходимо указывать полный путь: "/webapp/WEB-INF/eco-app/index.mustache"
+            //для вывода статистической страницы необходимо указывать полный путь: "/webapp/WEB-INF/eco-app/index.ftl"
             return new ModelAndView("index");
     }*/
 
     @GetMapping("/main")
-    public String main(Map<String,Object> model){
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model){
         Iterable<Message> messages = messageRepository.findAll();
-        model.put("messages", messages);
+
+        if (filter != null && !filter.isEmpty()) {
+            messages = messageRepository.findByTag(filter);
+        } else {
+            messages = messageRepository.findAll();
+        }
+
+        model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
         return "main";
     }
 
@@ -63,22 +71,5 @@ public class HomeController {
 
         return "main";
     }
-
-    @PostMapping("filter")
-    public String filter(@RequestParam String filter,
-                         Map<String, Object> model){
-
-        Iterable<Message> messages;
-        if (filter != null && !filter.isEmpty()) {
-            messages = messageRepository.findByTag(filter);
-        } else {
-            messages = messageRepository.findAll();
-        }
-        model.put("messages", messages);
-
-        return "main";
-    }
-
-
 
 }
