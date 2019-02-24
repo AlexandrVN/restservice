@@ -15,7 +15,7 @@
 </div>
 <div>List messages</div>
 <form method="get" action="/main">
-    <input type="text" name="filter" placeholder="Input filter"  />
+    <input type="text" name="filter" placeholder="Input filter" value="${filter?ifExists}" />
     <button type="submit">Find</button>
 </form>
 
