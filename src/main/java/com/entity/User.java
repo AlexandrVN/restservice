@@ -20,14 +20,14 @@ public class User implements UserDetails {
     private boolean active;
 
     private String email;
-    private boolean activeCode;
+    private String activationCode;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
     }
 
@@ -104,11 +104,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public boolean isActiveCode() {
-        return activeCode;
+    public String getActivationCode() {
+        return activationCode;
     }
 
-    public void setActiveCode(boolean activeCode) {
-        this.activeCode = activeCode;
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 }
