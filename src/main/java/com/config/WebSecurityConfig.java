@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -27,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //включаем авторизацию
                 .authorizeRequests()
                     //пользователи, который приходят по этому пути имеют полный доступ
-                    .antMatchers("/", "/registration", "/static/**").permitAll()
+                    .antMatchers("/", "/registration", "/static/**", "/activate/*").permitAll()
                     //для других запросов требуем авторизацию
                     .anyRequest().authenticated()
                 .and()
