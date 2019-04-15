@@ -15,7 +15,7 @@ create table message (
 ) engine=MyISAM DEFAULT CHARSET=utf8;
 
 create table user_db (
-    id bigint not null,
+    id bigint not null AUTO_INCREMENT,
     activation_code varchar(255),
     active bit not null,
     email varchar(255),
